@@ -1,0 +1,11 @@
+Model Information:
+* title:	Sea Mine Black
+* source:	https://sketchfab.com/3d-models/sea-mine-black-7f503538a0de4bfa93737ccfab193d36
+* author:	AbsoluteMadLadd (https://sketchfab.com/AbsoluteMadLadd)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Sea Mine Black" (https://sketchfab.com/3d-models/sea-mine-black-7f503538a0de4bfa93737ccfab193d36) by AbsoluteMadLadd (https://sketchfab.com/AbsoluteMadLadd) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

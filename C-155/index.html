@@ -1,0 +1,116 @@
+<!----------------------------------------------------------------Ablaze Under the Water---------------------------------------------------------------->
+
+<!--Defining the document-->
+<!DOCTYPE>
+
+<!--Defining th head tag-->
+<head>
+
+    <!--Sourcing data using script tags:- A-FRAME, move.js and mine.js-->
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="move.js"></script>
+    <script src="mine.js"></script>
+    <script src="collide.js"></script> 
+    <script src="torpedo.js"></script>
+    <script src="collide_uni.js"></script>
+    
+   
+</head>
+
+<!--Defining the body tag-->
+<body>
+
+    <!--Adding the scene tag-->
+   <a-scene physics="gravity:-9.8"  id="fog_container" fog="density:0.06;type:exponential;color:#AAA" >
+
+       <!--Adding introductory and instrcutional text entities-->
+       <!----Introductory text-->
+       <a-entity position="-10.6 7 0" text="font:exo2bold;align:center;width:25;color:black;value:ABLAZE UNDER THE WATER V 0.2.0"></a-entity>
+       <a-entity position="-10.6 5.5 0" text="font:exo2bold;align:center;width:10;color:black;value:(ELEMENTS AND SUBMARINE MOVEMENT(NO TORPEDO) AND NO INTERACTION)"></a-entity>
+
+       <!----Instructional text-->
+       <a-entity position="-10.6 4 0" text="font:exo2bold;align:center;width:15;color:black;value: WASD Controls"></a-entity>
+       <a-entity position="-10.6 3 0" text="font:exo2bold;align:center;width:15;color:black;value:Descend: Down Arrow"></a-entity> 
+       <a-entity position="-10.6 2 0" text="font:exo2bold;align:center;width:15;color:black;value:Ascend: Up Arrow"></a-entity> 
+       <a-entity position="-10.6 1 0" text="font:exo2bold;align:center;width:15;color:black;value: Scout Torpedo: T"></a-entity> 
+       
+       
+        <!--Defining an entity which contains the camera, submarine(player) and text-->
+       <a-entity id="player_class"   move-submarine-planar  move-submarine-vertical>
+
+        <!--Defining the camera tag-->
+        <a-camera id="camera"  animation="property: position; to:0 2.5 20;easing:linear;loop:false;dur:2000"    wasd-controls-enabled="false" position="0 40 50">
+        </a-camera>
+
+        <!--Logistical text-->
+        <a-entity id="survivor_count" position="1 13 -2" text="font:exo2bold;align:center;width:30;color:black;value:Survivors left:"></a-entity>
+        <a-entity id="survivor_count_num" position="6 13 -2" text="font:exo2bold;align:center;width:30;color:black;value:3"></a-entity>
+        <a-entity id="torpedo_count" position="1 15 -2" text="font:exo2bold;align:center;width:30;color:black;value:Torpedoes left:"></a-entity>
+        <a-entity id="torpedo_count_num" position="6 15 -2" text="font:exo2bold;align:center;width:30;color:black;value:1"></a-entity>
+
+
+        <!--Integrating the submarine model-->
+        <a-entity  dynamic-body="mass:0" collision-detector id="submarine_player"   gltf-model="#Submarine"></a-entity>
+       </a-entity>
+
+       <a-entity torpedo-launcher></a-entity>
+
+       <!--Adding directional light using light tags-->
+       <a-entity  light="type:directional;intensity:5;distance:300;color:white" position="120 150 0"></a-entity>
+       <a-entity light="type:directional;intensity:5;distance:300;color:white" position="-120 150 0"></a-entity>
+
+       <!--Downloading the asset models using the assets tag-->
+       <a-assets>
+           <a-asset-item id="Submarine" src="/Submarine/scene.gltf"></a-asset-item>
+           <a-asset-item  id="ShipLight" src="/Battleship_light/scene.gltf"></a-asset-item>
+           <a-asset-item  id="ShipHeavy" src="/Battleship_heavy/scene.gltf"></a-asset-item>
+           <a-asset-item id="'Mine" src="/SeaMine/scene.gltf"></a-asset-item>
+           <a-asset-item id="Survivor" src="/Survivor/scene.gltf"></a-asset-item>
+           <a-asset-item id="Mountain" src="/Mountain/scene.gltf"></a-asset-item>
+       </a-assets>
+       
+    <!--Integrating the light and heavy ships-->
+    <!----Static Ships-->
+    <a-entity rotation="0 45 45"  scale="0.5 0.5 0.5" position="50 0 0" gltf-model="#ShipLight"></a-entity>
+    <a-entity rotation="56 49 -5" scale="0.25 0.25 0.25" position="-36 -5 0" gltf-model="#ShipHeavy"></a-entity>
+    
+    <!----Dynamic Ships-->
+
+    <a-entity  rotation="-56 90 0" animation="property:position;to:0 -40 0;dur:40000" scale="0.25 0.25 0.25" position="36 0 -50" gltf-model="#ShipLight"></a-entity>  
+    
+    <!--Rendering three soldiers as survivors-->
+
+
+    <!--Adding the mountian located in the distance, the target of the submarine-->   
+    <a-entity id="mountain" scale="100 100 100" gltf-model="#Mountain" position="0 0 -850"></a-entity>
+
+    <!--Adding introductory, cautionary and guiding text entities-->
+    <!----Introductory text-->
+    <a-entity position="0 20 -30" text="font:exo2bold;align:center;width:100;color:red;value:THE ISLAND'S ONLY A MILE AWAY! FAST!"></a-entity>
+
+    <!----Guiding text-->
+    <a-entity position="6 10 -42" text="font:exo2bold;align:center;width:30;color:black;value:The Bismarck has capitulated! Rescue the sole three survivors!"></a-entity>
+
+    <!----Cautionary text-->
+    <a-entity response-type="arraybuffer" position="6 3 -50" text="font:exo2bold;align:center;width:30;color:black;value:Watch out for mines under the water!"></a-entity>
+
+    <!----Guiding text-->
+    <a-entity position="6 3 -720" text="font:exo2bold;align:center;width:30;color:black;value:Destroy the enemy!"></a-entity>
+    <a-entity position="6 -3 -720" text="font:exo2bold;align:center;width:30;color:black;value:Destroy the enemy!"></a-entity>
+
+    <!--Rendering the sea-->
+    <a-box mine-dynamic  id="water" color="blue" position="0 0.4 0" depth="0.02" width="4000" height="4000" rotation="-90 0 0" ></a-box>
+
+    <!--Rendering three soldiers as survivors-->
+    <a-entity static-body="shape:sphere;sphereRadius:0.000000001" id="survivor1"  scale="0.005 0.005 0.005" position="2.05 -0.2 -45" gltf-model="#Survivor"></a-entity>
+    <a-entity static-body="shape:sphere;sphereRadius:0.0000001"  id="survivor2"  rotation="0 45 0" scale="0.005 0.005 0.005" position="2.5 -0.2 -45" gltf-model="#Survivor"></a-entity>
+    <a-entity static-body="shape:sphere;sphereRadius:0.000001"  id="survivor3" rotation="0 -45 0" scale="0.005 0.005 0.005" position="1 -0.2 -43" gltf-model="#Survivor"></a-entity>
+      
+    </a-entity>
+   </a-scene>   
+</body>
+
+<!----------------------------------------------------------------Ablaze Under the Water---------------------------------------------------------------->
